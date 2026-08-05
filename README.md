@@ -1,2 +1,9 @@
 # ShortUrl
-Service that allows you to shorten your links by redirecting them through its own infrastructure
+
+Монолит на Flask для сокращения ссылок. Тестовый проект.
+
+## Запуск
+
+```bash
+uvicorn main:app --interface wsgi
+```
