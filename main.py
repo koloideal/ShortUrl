@@ -4,5 +4,5 @@ app = Flask(__name__)
 
 
 @app.get("/")
-def health() -> tuple[str, int]:
-    return "alive", 200
+def index():
+    return app.send_static_file("index.html")
