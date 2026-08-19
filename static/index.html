@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Сервис для создания коротких ссылок">
+    <title>Коротко — сокращение ссылок</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/app.js" defer></script>
+</head>
+<body>
+    <!-- Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 -->
+    <div class="app-shell">
+        <header class="site-header">
+            <a class="brand" href="/" aria-label="Коротко, главная">
+                <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9.5 14.5 7 17a3.54 3.54 0 0 1-5-5l4-4a3.54 3.54 0 0 1 5 0M14.5 9.5 17 7a3.54 3.54 0 0 1 5 5l-4 4a3.54 3.54 0 0 1-5 0M8.5 15.5l7-7"/>
+                </svg>
+                <span>Коротко</span>
+            </a>
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Включить тёмную тему" title="Включить тёмную тему">
+                <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>
+                </svg>
+                <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <section class="shortener" aria-labelledby="page-title">
+                <div class="shortener__heading">
+                    <h1 id="page-title">Сократить ссылку</h1>
+                    <p>Вставьте полный адрес страницы.</p>
+                </div>
+
+                <div class="shortener__body">
+                    <form class="shorten-form" id="shorten-form" novalidate>
+                        <div class="field">
+                            <label for="url">Адрес</label>
+                            <input
+                                id="url"
+                                name="url"
+                                type="url"
+                                inputmode="url"
+                                autocomplete="url"
+                                placeholder="https://example.com/page"
+                                aria-describedby="form-message"
+                                required
+                            >
+                        </div>
+                        <button class="button button--submit" type="submit">
+                            <span class="button__label">Сократить</span>
+                            <span class="button__loader" aria-hidden="true"></span>
+                        </button>
+                        <p class="form-message" id="form-message" aria-live="polite"></p>
+                    </form>
+
+                    <section class="result" id="result" aria-labelledby="result-title" hidden>
+                        <div class="result__heading">
+                            <div>
+                                <p class="result__label">Готово</p>
+                                <h2 id="result-title">Короткая ссылка</h2>
+                            </div>
+                            <button class="text-button" id="reset-button" type="button">Новая ссылка</button>
+                        </div>
+                        <div class="result__link">
+                            <a id="short-url" href="#" target="_blank" rel="noopener noreferrer"></a>
+                            <button class="button button--copy" id="copy-button" type="button">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="8" y="8" width="11" height="11" rx="2"/>
+                                    <path d="M16 8V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h1"/>
+                                </svg>
+                                <span>Копировать</span>
+                            </button>
+                        </div>
+                        <p class="copy-message" id="copy-message" aria-live="polite"></p>
+                    </section>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
