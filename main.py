@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, g, request, redirect, abort
 import database
-import string, random, validators
+import string, random, sqlite3
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dsl!f32jjcv6@joizj2%#23jn23xcvh34nf'
@@ -36,7 +36,7 @@ def create_shortlinks():
     data = request.get_json()
     target_url = data.get('url')
     
-    if not data.startwith('http://', 'https://'):
+    if not data.startswith('http://', 'https://'):
         return jsonify({
   "error": {
     "code": "invalid_url",
@@ -57,8 +57,21 @@ def create_shortlinks():
     db = database.get_db()
     cursor = db.cursor()
     code = generate_random_code()
-
     short_url = f"http://localhost:8000/{code}"
+
+    try:
+        cursor.execute(
+            "INSERT INTO links (code, short_url, target_url) VALUES (?, ?, ?)", 
+            (code, short_url, target_url))
+        db.commit()
+    except sqlite3.IntegrityError:
+        return jsonify({
+  "error": {
+    "code": "internal_error",
+    "message": "Внутренняя ошибка сервиса"
+  }
+}),500
+    
     return jsonify({
         "code": code,
         "short_url": short_url,
